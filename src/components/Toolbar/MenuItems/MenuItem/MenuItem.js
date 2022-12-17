@@ -5,7 +5,7 @@ const MenuItem = (props) => {
 
     return (
         <li className="MenuItem">
-            <a href={props.link} exact activeClassName="active" activeStyle={{ color: 'red', cursor: 'pointer' }}>
+            <a href={props.link.pathname} exact activeClassName="active" activeStyle={{ color: 'red', cursor: 'pointer' }}>
                 {props.children}
             </a>
         </li>

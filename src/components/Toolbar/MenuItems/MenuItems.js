@@ -4,11 +4,11 @@ import MenuItem from './MenuItem/MenuItem';
 const MenuItems = ()=>{
     return(
         <ul className="MenuItems">
-            <MenuItem link="/">
+            <MenuItem link={{pathname:"/"}}>
                 صفحه اصلی
             </MenuItem>
             <MenuItem link={{
-                pathname:"/rder",
+                pathname:"/order",
                 search:"?sort=name",
                 hash:"#the-hash",
                 state:{fromDashboard:true}
