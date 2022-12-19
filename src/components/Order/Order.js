@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './Order.css';
 
 import NewOrder from './neworder/neworder';
+import Orders from './orders/orders';
 
 const Order = (props) => {
   const [orders, setOrders] = useState([]);
