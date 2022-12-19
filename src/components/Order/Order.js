@@ -1,54 +1,53 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 
 import './Order.css';
 
 import NewOrder from './neworder/neworder';
 
 const Order = (props) => {
-
-  const[lengthglass,setlengthglass]= useState('');
-  const[wideglass,setwideglass] = useState('');
-  const[materialglass,setmaterialglass] = useState('');
-  const [numberglass,setnumberglass] = useState('');
-  const[error,setError] = useState(false);
-  const lengthglassHandler=(event)=>{
+  const [orders, setOrders] = useState([]);
+  const [lengthglass, setlengthglass] = useState('');
+  const [wideglass, setwideglass] = useState('');
+  const [materialglass, setmaterialglass] = useState('');
+  const [numberglass, setnumberglass] = useState('');
+  const [error, setError] = useState(false);
+  const lengthglassHandler = (event) => {
     setlengthglass(event.target.value)
   }
-  const wideglassHandler=(event)=>{
+  const wideglassHandler = (event) => {
     setwideglass(event.target.value)
   }
-  const materialglassHandler=(event)=>{
+  const materialglassHandler = (event) => {
     setmaterialglass(event.target.value)
   }
-  const numberglassHandler=(event)=>{
+  const numberglassHandler = (event) => {
     setnumberglass(event.target.value);
   }
 
-  let ErrorMessage=null;
-  if(error){
-    ErrorMessage = <h1 style={{textAlign:'center',color:'red'}}>متاسفانه عملیات شما با شکست روبرو شد.لطفا مجددا تلاش کنید</h1>
+  let ErrorMessage = null;
+  if (error) {
+    ErrorMessage = <h1 style={{ textAlign: 'center', color: 'red' }}>متاسفانه عملیات شما با شکست روبرو شد.لطفا مجددا تلاش کنید</h1>
   }
 
-  const addOrder=()=>{
-    fetch('http://192.168.119.2/order/insertOrder.php',{
-      method:'POST',
-      headers:{
-          'Accept' : 'applicaion/json',
-          'Content-Type':'application/json',
-      },
-      body:JSON.stringify({
-        length_glass:lengthglass,
-        wide_glass:wideglass,
-        material_glass:materialglass,
-        numberglass:numberglass
-      })
-  }).then((response)=>response.json())
-      .then((responseJson)=>{
-       
-          props.history.replace('/');
-      }).catch((error)=>{
-        setError(error)
-      })
+  const addOrder = () => {
+
+    const newOrders = [...orders];
+    newOrders.push({
+      'id': orders.length,
+      'length': lengthglass,
+      'wide': wideglass,
+      'material': materialglass,
+      'number': numberglass
+    });
+    setOrders(newOrders);
+    console.log(newOrders)
+
+  }
+
+  const deleteOrder=(index)=>{
+    const ordersList=[...orders];
+    ordersList.splice(index,1);
+    setOrders(ordersList)
   }
 
   return (
@@ -58,7 +57,7 @@ const Order = (props) => {
       </div>
 
       {ErrorMessage}
-        <NewOrder
+      <NewOrder
         lengthglass={lengthglass}
         wideglass={wideglass}
         materialglass={materialglass}
@@ -68,7 +67,12 @@ const Order = (props) => {
         materialglassHandler={materialglassHandler}
         numberglassHandler={numberglassHandler}
         clicked={addOrder}
-        
+
+      />
+
+      <Orders
+        ordersList={orders}
+        deleted={deleteOrder}
       />
     </React.Fragment>
   )
