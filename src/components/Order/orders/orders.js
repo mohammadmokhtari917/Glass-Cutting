@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Order from './orderShow/orderShow';
 import './orderShow/order.css';
+import Button from '../../UI/button/button';
 
 const orders = (props) => {
 
@@ -16,6 +17,24 @@ const orders = (props) => {
         />
 
     )
-    return ordersMap
+    const req = () => {
+        let req = props.ordersList.map((order, index) =>
+        props.submited(order.length, order.wide, order.material, order.number)
+    )
+    }
+
+    return (
+        <React.Fragment>
+            {ordersMap}
+            <br />
+            {props.erorr}
+            <Button
+                btnType="success"
+                clicked={req}
+            >
+                ثبت سفارش
+            </Button>
+        </React.Fragment>
+    )
 }
 export default orders;

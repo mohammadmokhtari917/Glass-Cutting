@@ -25,11 +25,6 @@ const Order = (props) => {
     setnumberglass(event.target.value);
   }
 
-  let ErrorMessage = null;
-  if (error) {
-    ErrorMessage = <h1 style={{ textAlign: 'center', color: 'red' }}>متاسفانه عملیات شما با شکست روبرو شد.لطفا مجددا تلاش کنید</h1>
-  }
-
   const addOrder = () => {
 
     const newOrders = [...orders];
@@ -45,10 +40,36 @@ const Order = (props) => {
 
   }
 
-  const deleteOrder=(index)=>{
-    const ordersList=[...orders];
-    ordersList.splice(index,1);
+  const deleteOrder = (index) => {
+    const ordersList = [...orders];
+    ordersList.splice(index, 1);
     setOrders(ordersList)
+  }
+
+  const submitOrder = (length, wide, material, number) => {
+    fetch('http://192.168.119.2/order/insertOrder.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'applicaion/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        length_glass: length,
+        wide_glass: wide,
+        material_glass: material,
+        number_glass: number
+      })
+    }).then((response) => response.json())
+      .then((responseJson) => {
+
+        props.history.replace('/');
+      }).catch((error) => {
+        setError(error)
+      })
+  }
+  let ErrorMessage = null;
+  if (error) {
+    ErrorMessage = <h1 style={{ textAlign: 'center', color: 'red' }}>متاسفانه عملیات شما با شکست روبرو شد.لطفا مجددا تلاش کنید</h1>
   }
 
   return (
@@ -56,8 +77,6 @@ const Order = (props) => {
       <div className='order'>
         <h2>سفارش</h2>
       </div>
-
-      {ErrorMessage}
       <NewOrder
         lengthglass={lengthglass}
         wideglass={wideglass}
@@ -74,7 +93,10 @@ const Order = (props) => {
       <Orders
         ordersList={orders}
         deleted={deleteOrder}
+        submited={submitOrder}
+        erorr={ErrorMessage}
       />
+      
     </React.Fragment>
   )
 
