@@ -12,7 +12,7 @@ const SignIn = (props) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const { dispatch } = useContext(AuthContext);
+    const  dispatch  = useContext(AuthContext);
     useEffect(() => {
         generateCaptcha();
     }, [])

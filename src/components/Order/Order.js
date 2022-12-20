@@ -75,7 +75,6 @@ const Order = (props) => {
   return (
     <React.Fragment>
       <div className='order'>
-        <h2>سفارش</h2>
       </div>
       <NewOrder
         lengthglass={lengthglass}
