@@ -9,7 +9,7 @@ const Order = (props) => {
   const [orders, setOrders] = useState([]);
   const [lengthglass, setlengthglass] = useState('');
   const [wideglass, setwideglass] = useState('');
-  const [materialglass, setmaterialglass] = useState('');
+  const [materialglass, setmaterialglass] = useState('ساده');
   const [numberglass, setnumberglass] = useState('');
   const [error, setError] = useState(false);
   const lengthglassHandler = (event) => {

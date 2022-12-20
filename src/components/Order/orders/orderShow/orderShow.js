@@ -2,6 +2,7 @@ import React from 'react';
 import './order.css';
 import Button from '../../../UI/button/button';
 const Student = (props) => {
+
     return (
         <div className="students">
             <label>شماره :{props.id}</label>

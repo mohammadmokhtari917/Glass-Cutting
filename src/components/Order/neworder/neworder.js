@@ -38,7 +38,7 @@ const NewOrder = (props) => {
             setErrorMessage('نوع شیشه را انتخاب کنید');
             return false;
         }
-        setErrorMessage('numberglass');
+        setErrorMessage('');
         return true;
     }
 
@@ -49,6 +49,7 @@ const NewOrder = (props) => {
                 props.clicked() 
             }
         }
+        const options = [{label:'ساده',value:'Sadeh'},{label:'مشجر',value:'Moshajar'},{label:'رنگی',value:'Ranghe'},{label:'آینه',value:'Aine'}];
     return (
         <div className='NewPost'>
             <h1>ثبت سفارش</h1>
@@ -58,7 +59,11 @@ const NewOrder = (props) => {
             <label>عرض</label>
             <input type="number" value={wideglass} onChange={wideglassHandler} maxLength={3} />
             <label>متریال</label>
-            <input type="text" value={materialglass} onChange={materialglassHandler} />
+            <select  type="text" value={materialglass} onChange={materialglassHandler}>
+            {options.map((option) => (
+              <option value={option.label}>{option.label}</option>
+            ))}
+          </select>
             <label>تعداد</label>
             <input type="number" value={numberglass} onChange={numberglassHandler} />
             <Button clicked={clickHandler} btnType="danger">اضافه کردن</Button>
