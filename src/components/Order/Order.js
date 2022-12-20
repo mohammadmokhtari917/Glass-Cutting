@@ -29,7 +29,7 @@ const Order = (props) => {
 
     const newOrders = [...orders];
     newOrders.push({
-      'id': orders.length,
+      'id': orders.length+1,
       'length': lengthglass,
       'wide': wideglass,
       'material': materialglass,
